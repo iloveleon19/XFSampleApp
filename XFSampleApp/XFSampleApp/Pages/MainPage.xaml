@@ -11,6 +11,10 @@
             HorizontalOptions="Center"
             Text="Welcome to Xamarin.Forms!"
             VerticalOptions="CenterAndExpand" />
+        <Button
+            Clicked="Button_Clicked"
+            Text="前往 DetailPage !"
+            VerticalOptions="CenterAndExpand" />
     </StackLayout>
 
 </ContentPage>
