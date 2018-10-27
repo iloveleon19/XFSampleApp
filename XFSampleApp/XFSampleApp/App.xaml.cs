@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XFSampleApp.Pages;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XFSampleApp
@@ -11,7 +12,7 @@ namespace XFSampleApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+           MainPage = new NavigationPage(new AccountPage());
         }
 
         protected override void OnStart()
