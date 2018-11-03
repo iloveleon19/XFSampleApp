@@ -4,11 +4,28 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
             <Label
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
                 HorizontalOptions="CenterAndExpand"
                 Text="Welcome to DetailPage!"
                 VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

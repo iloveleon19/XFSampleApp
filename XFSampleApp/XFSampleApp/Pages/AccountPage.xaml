@@ -6,10 +6,23 @@
     Title="登入頁面">
     <ContentPage.Content>
         <StackLayout>
-            <Button
-                Clicked="Button_Clicked"
-                Text="點我吧!"
-                VerticalOptions="CenterAndExpand" />
+            <Label HorizontalOptions="StartAndExpand" Text="Account:" />
+            <Entry x:Name="AccountEntry" Placeholder="請輸入帳號..." />
+            <Label HorizontalOptions="StartAndExpand" Text="Password:" />
+            <Entry
+                x:Name="PasswordEntry"
+                IsPassword="True"
+                Placeholder="請輸入密碼..." />
+            <StackLayout BackgroundColor="Azure" Orientation="Horizontal">
+                <Button
+                    Clicked="CancelButton_Clicked"
+                    Text="取消"
+                    VerticalOptions="CenterAndExpand" />
+                <Button
+                    Clicked="Button_Clicked"
+                    Text="登入"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
