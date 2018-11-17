@@ -2,7 +2,8 @@
 <ContentPage
     x:Class="XFSampleApp.Pages.DetailPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="詳細資訊">
     <ContentPage.Content>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -18,14 +19,28 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="10" />
             </Grid.RowDefinitions>
-            <Label
+            <Image
                 Grid.Row="1"
-                Grid.RowSpan="2"
                 Grid.Column="2"
-                Grid.ColumnSpan="2"
                 HorizontalOptions="CenterAndExpand"
-                Text="Welcome to DetailPage!"
+                Source="nchu"
                 VerticalOptions="CenterAndExpand" />
+            <ScrollView
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3">
+                <StackLayout>
+                    <Label FontSize="Medium" Text="名稱:" />
+                    <Label FontSize="Large" Text="國立中興大學" />
+                    <Label FontSize="Medium" Text="電話:" />
+                    <Label FontSize="Large" Text="04-22873181" />
+                    <Label FontSize="Medium" Text="地址:" />
+                    <Label FontSize="Large" Text="402 台中市南區興大路145號" />
+                    <Label FontSize="Medium" Text="電子信箱:" />
+                    <Label FontSize="Large" Text="dowdot@nchu.edu.tw" />
+                </StackLayout>
+            </ScrollView>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

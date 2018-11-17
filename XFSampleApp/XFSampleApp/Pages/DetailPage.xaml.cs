@@ -15,7 +15,7 @@ namespace XFSampleApp.Pages
 		public DetailPage ()
 		{
 			InitializeComponent ();
-            PreviewGridCell(this.Content as Grid, Color.Pink);
+            //PreviewGridCell(this.Content as Grid, Color.Pink);
         }
 
         private void PreviewGridCell(Grid grid, Color cellBackgroundColor)
@@ -36,6 +36,7 @@ namespace XFSampleApp.Pages
                 }
             }
             var allBuildPreviewCellCount = columnCount * rowCount;
+            var chiledrenCount = grid.Children.Count;
             for (int start = 0; start < grid.Children.Count - allBuildPreviewCellCount; start++)
             {
                 var targetCellView = grid.Children[0];

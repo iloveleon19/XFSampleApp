@@ -3,14 +3,31 @@
     x:Class="XFSampleApp.Pages.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:XFSampleApp">
+    xmlns:local="clr-namespace:XFSampleApp"
+    Title="學校列表">
 
     <StackLayout>
         <!--  Place new controls here  -->
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to Xamarin.Forms!"
-            VerticalOptions="CenterAndExpand" />
+        <ListView
+            x:Name="SchoolListView"
+            IsPullToRefreshEnabled="True"
+            ItemTapped="SchoolListView_ItemTapped"
+            Refreshing="ListView_Refreshing"
+            VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="nchu" />
+                            <Label
+                                Text="{Binding .}"
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Button
             Clicked="Button_Clicked"
             Text="前往 DetailPage !"
