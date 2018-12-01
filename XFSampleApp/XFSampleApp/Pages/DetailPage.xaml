@@ -23,7 +23,7 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 HorizontalOptions="CenterAndExpand"
-                Source="nchu"
+                Source="{Binding Logo}"
                 VerticalOptions="CenterAndExpand" />
             <ScrollView
                 Grid.Row="2"
@@ -31,13 +31,13 @@
                 Grid.ColumnSpan="3">
                 <StackLayout>
                     <Label FontSize="Medium" Text="名稱:" />
-                    <Label FontSize="Large" Text="國立中興大學" />
+                    <Label FontSize="Large" Text="{Binding Name}" />
                     <Label FontSize="Medium" Text="電話:" />
-                    <Label FontSize="Large" Text="04-22873181" />
+                    <Label FontSize="Large" Text="{Binding Tel}" />
                     <Label FontSize="Medium" Text="地址:" />
-                    <Label FontSize="Large" Text="402 台中市南區興大路145號" />
+                    <Label FontSize="Large" Text="{Binding Address}" />
                     <Label FontSize="Medium" Text="電子信箱:" />
-                    <Label FontSize="Large" Text="dowdot@nchu.edu.tw" />
+                    <Label FontSize="Large" Text="{Binding Email}" />
                 </StackLayout>
             </ScrollView>
 

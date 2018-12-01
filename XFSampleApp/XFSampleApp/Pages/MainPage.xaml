@@ -17,21 +17,33 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="nchu" />
-                            <Label
-                                Text="{Binding .}"
-                                VerticalOptions="CenterAndExpand"
-                                VerticalTextAlignment="Center" />
-                        </StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding Logo}" />
+                            <StackLayout Grid.Column="1">
+                                <Label
+                                    Text="{Binding Name}"
+                                    VerticalOptions="CenterAndExpand"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Text="{Binding Address}"
+                                    VerticalOptions="CenterAndExpand"
+                                    VerticalTextAlignment="Center" />
+                            </StackLayout>
+                            <Button
+                                Grid.Column="2"
+                                Clicked="CallButton_Clicked"
+                                Text="Call" />
+
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            Clicked="Button_Clicked"
-            Text="前往 DetailPage !"
-            VerticalOptions="CenterAndExpand" />
     </StackLayout>
 
 </ContentPage>

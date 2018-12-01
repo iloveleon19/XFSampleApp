@@ -6,16 +6,22 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XFSampleApp.models;
 
 namespace XFSampleApp.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetailPage : ContentPage
 	{
-		public DetailPage ()
+		private DetailPage ()
 		{
 			InitializeComponent ();
             //PreviewGridCell(this.Content as Grid, Color.Pink);
+        }
+
+        public DetailPage(SchoolInfo schoolInfo):this()
+        {
+            BindingContext = schoolInfo;
         }
 
         private void PreviewGridCell(Grid grid, Color cellBackgroundColor)
