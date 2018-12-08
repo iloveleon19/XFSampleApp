@@ -17,6 +17,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="編輯" Clicked="EditMenuItem_Clicked" />
+                            <MenuItem IsDestructive="True" Text="刪除" Clicked="DeleteMenuItem_Clicked"/>
+                        </ViewCell.ContextActions>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60" />

@@ -33,11 +33,19 @@
                     <Label FontSize="Medium" Text="名稱:" />
                     <Label FontSize="Large" Text="{Binding Name}" />
                     <Label FontSize="Medium" Text="電話:" />
-                    <Label FontSize="Large" Text="{Binding Tel}" />
+                    <Label FontSize="Large" Text="{Binding Tel}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
                     <Label FontSize="Medium" Text="地址:" />
                     <Label FontSize="Large" Text="{Binding Address}" />
                     <Label FontSize="Medium" Text="電子信箱:" />
-                    <Label FontSize="Large" Text="{Binding Email}" />
+                    <Label FontSize="Large" Text="{Binding Email}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
             </ScrollView>
 

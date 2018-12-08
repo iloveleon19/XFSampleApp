@@ -42,7 +42,6 @@ namespace XFSampleApp.Pages
                 }
             }
             var allBuildPreviewCellCount = columnCount * rowCount;
-            var chiledrenCount = grid.Children.Count;
             for (int start = 0; start < grid.Children.Count - allBuildPreviewCellCount; start++)
             {
                 var targetCellView = grid.Children[0];
@@ -51,6 +50,27 @@ namespace XFSampleApp.Pages
                     grid.RaiseChild(targetCellView);
                 }
             }
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var label = sender as Label;
+            var result = CheckLabelType(label.Text);
+
+            var isConfirm = await DisplayAlert("通知", $"是否執行 {result.Item2} 處理 ?", "確定", "取消");
+            if (isConfirm)
+            {
+                Device.OpenUri(new Uri(result.Item1));
+            }
+        }
+
+        private Tuple<string, string> CheckLabelType(string text)
+        {
+            if (text.Contains("@"))
+            {
+                return new Tuple<string, string>($"mailto:{text}", "發送 Email");
+            }
+            return new Tuple<string, string>($"tel:{text}", "撥打電話");
         }
     }
 }

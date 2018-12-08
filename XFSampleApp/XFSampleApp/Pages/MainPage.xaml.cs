@@ -46,12 +46,37 @@ namespace XFSampleApp.Pages
             SchoolListView.SelectedItem = null;
         }
 
-        private void CallButton_Clicked(object sender, EventArgs e)
+        private async void CallButton_Clicked(object sender, EventArgs e)
         {
-            var callButton = sender as Button;
-            var callSchoolInfo = (callButton.BindingContext as SchoolInfo);
-            var callTel = callSchoolInfo.Tel;
-            Device.OpenUri(new Uri($"tel:{callTel}"));
+            var isConfirm = await DisplayAlert("通知", "是否撥打電話?", "確定", "取消");
+            if (isConfirm)
+            {
+                var callButton = sender as Button;
+                var callSchoolInfo = (callButton.BindingContext as SchoolInfo);
+                var callTel = callSchoolInfo.Tel;
+                Device.OpenUri(new Uri($"tel:{callTel}"));
+            }
+        }
+
+        private async void EditMenuItem_Clicked(object sender, EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            var schoolInfo = menuItem.BindingContext as SchoolInfo;
+
+            await Navigation.PushModalAsync(new DetailEditingPage(schoolInfo));
+        }
+
+        private async void DeleteMenuItem_Clicked(object sender, EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            var schoolInfo = menuItem.BindingContext as SchoolInfo;
+            var name = schoolInfo.Name;
+            var isConfirm = await DisplayAlert("通知", $"是否刪除 {name} 此項目?", "確定", "取消");
+
+            if (isConfirm)
+            {
+                schoolData.Remove(schoolInfo);
+            }
         }
     }
 }

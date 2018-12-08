@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XFSampleApp.Pages.DetailEditingPage">
+    <ContentPage.Content>
+        <Grid ColumnSpacing="1" RowSpacing="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+            <Image
+                Grid.Row="1"
+                Grid.Column="2"
+                HorizontalOptions="CenterAndExpand"
+                Source="{Binding Logo}"
+                VerticalOptions="CenterAndExpand"  />
+            <ScrollView
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3">
+                <StackLayout>
+                    <Label FontSize="Medium" Text="名稱:" />
+                    <Entry FontSize="Large" Text="{Binding Name}" />
+                    <Label FontSize="Medium" Text="電話:" />
+                    <Entry FontSize="Large" Text="{Binding Tel}" />
+                    <Label FontSize="Medium" Text="地址:" />
+                    <Entry FontSize="Large" Text="{Binding Address}" />
+                    <Label FontSize="Medium" Text="電子信箱:" />
+                    <Entry FontSize="Large" Text="{Binding Email}" />
+                </StackLayout>
+            </ScrollView>
+            <Grid
+                Grid.Row="3"
+                Grid.Column="1"
+                Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Clicked="FinishButton_Clicked"
+                    HorizontalOptions="FillAndExpand"
+                    Text="完成" />
+                <Button
+                    Grid.Column="1"
+                    Clicked="CancelButton_Clicked"
+                    HorizontalOptions="FillAndExpand"
+                    Text="取消" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
