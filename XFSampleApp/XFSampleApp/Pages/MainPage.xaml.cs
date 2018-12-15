@@ -11,7 +11,7 @@ namespace XFSampleApp.Pages
 {
     public partial class MainPage : ContentPage
     {
-        ObservableCollection<SchoolInfo> schoolData;
+        public static ObservableCollection<SchoolInfo> schoolData;
 
         public MainPage()
         {

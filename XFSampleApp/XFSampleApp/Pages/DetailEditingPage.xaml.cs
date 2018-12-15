@@ -14,6 +14,7 @@ namespace XFSampleApp.Pages
     public partial class DetailEditingPage : ContentPage
     {
         private SchoolInfo schoolInfo;
+        private SchoolInfo originalSchoolInfo;
 
         public DetailEditingPage()
         {
@@ -22,7 +23,20 @@ namespace XFSampleApp.Pages
 
         public DetailEditingPage(SchoolInfo schoolInfo):this()
         {
+            CloneSchoolInfo(schoolInfo);
             BindingContext = this.schoolInfo = schoolInfo;
+        }
+
+        private void CloneSchoolInfo(SchoolInfo schoolInfo)
+        {
+            originalSchoolInfo = new SchoolInfo()
+            {
+                Name = schoolInfo.Name,
+                Tel = schoolInfo.Tel,
+                Address = schoolInfo.Address,
+                Email = schoolInfo.Email,
+                Logo = schoolInfo.Logo,
+            };
         }
 
         private async void FinishButton_Clicked(object sender, EventArgs e)
@@ -32,6 +46,9 @@ namespace XFSampleApp.Pages
 
         private async void CancelButton_Clicked(object sender, EventArgs e)
         {
+            var index = MainPage.schoolData.IndexOf(schoolInfo);
+            MainPage.schoolData.Remove(schoolInfo);
+            MainPage.schoolData.Insert(index, originalSchoolInfo);
             await Navigation.PopModalAsync(true);
         }
     }
