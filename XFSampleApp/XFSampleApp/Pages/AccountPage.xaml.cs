@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace XFSampleApp.Pages
             if (await LoginAuthAsync(accountStr, passwordStr))
             {
                 await DisplayAlert("通知", "登入成功", "Go");
+                SaveAuthData();
                 await Navigation.PushAsync(new MainPage());
             }
             else
@@ -48,6 +50,25 @@ namespace XFSampleApp.Pages
                 AccountEntry.Text = "";
                 PasswordEntry.Text = "";
             }
+        }
+
+        private void SaveAuthData()
+        {
+            var cacheDir = Xamarin.Essentials.FileSystem.CacheDirectory;
+            //var mainDir = Xamarin.Essentials.FileSystem.AppDirectory;
+
+            System.Diagnostics.Debug.WriteLine(cacheDir);
+            //System.Diagnostics.Debug.WriteLine(mainDir);
+
+            var fullPath = cacheDir + "auth.log";
+            //var fullPath = mainDir() + "auth.log";
+
+            File.WriteAllText(fullPath,$"Be Authorized,{DateTime.Now.Ticks}");
+
+            ////看看有沒有成功寫入資料
+            //var result = File.ReadAllText(fullPath);
+            //System.Diagnostics.Debug.WriteLine(result);
+
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)

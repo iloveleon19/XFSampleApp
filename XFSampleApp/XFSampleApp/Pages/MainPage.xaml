@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:XFSampleApp"
     Title="學校列表">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="LogoutToolbarItem_Clicked" Text="登出" />
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <!--  Place new controls here  -->
         <ListView
@@ -18,8 +20,11 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="編輯" Clicked="EditMenuItem_Clicked" />
-                            <MenuItem IsDestructive="True" Text="刪除" Clicked="DeleteMenuItem_Clicked"/>
+                            <MenuItem Clicked="EditMenuItem_Clicked" Text="編輯" />
+                            <MenuItem
+                                Clicked="DeleteMenuItem_Clicked"
+                                IsDestructive="True"
+                                Text="刪除" />
                         </ViewCell.ContextActions>
                         <Grid>
                             <Grid.ColumnDefinitions>

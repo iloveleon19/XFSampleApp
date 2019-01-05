@@ -92,5 +92,30 @@ namespace XFSampleApp.Pages
                 schoolData.Remove(schoolInfo);
             }
         }
+
+        private async void LogoutToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            DeleteAuthData();
+            if(Navigation.NavigationStack.Count > 1)
+            {
+                await Navigation.PopAsync(true);
+                return;
+            }
+            App.Current.MainPage = new NavigationPage(new AccountPage());
+        }
+
+        private void DeleteAuthData()
+        {
+            var cacheDir = Xamarin.Essentials.FileSystem.CacheDirectory;
+            //var mainDir = Xamarin.Essentials.FileSystem.AppDirectory;
+
+            System.Diagnostics.Debug.WriteLine(cacheDir);
+            //System.Diagnostics.Debug.WriteLine(mainDir);
+
+            var fullPath = cacheDir + "auth.log";
+            //var fullPath = mainDir() + "auth.log";
+
+            System.IO.File.Delete(fullPath);
+        }
     }
 }
