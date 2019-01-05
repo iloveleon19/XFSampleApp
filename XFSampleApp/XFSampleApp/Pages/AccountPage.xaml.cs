@@ -32,9 +32,14 @@ namespace XFSampleApp.Pages
             }
 
             //實務上應是 WebAPI 呼叫帳號資訊的驗證邏輯
-            if (AccountEntry.Text.Equals("NCHU", StringComparison.CurrentCultureIgnoreCase) &&
-                PasswordEntry.Text == "123456")
+            //if (AccountEntry.Text.Equals("NCHU", StringComparison.CurrentCultureIgnoreCase) &&
+            //    PasswordEntry.Text == "123456")
+            var accountStr = AccountEntry.Text.ToLower();
+            var passwordStr = PasswordEntry.Text.ToLower();
+
+            if (await LoginAuthAsync(accountStr, passwordStr))
             {
+                await DisplayAlert("通知", "登入成功", "Go");
                 await Navigation.PushAsync(new MainPage());
             }
             else
@@ -49,6 +54,35 @@ namespace XFSampleApp.Pages
         {
             AccountEntry.Text = "";
             PasswordEntry.Text = "";
+        }
+
+        private async Task<bool> LoginAuthAsync(string account, string password)
+        {
+            var httpClient = new System.Net.Http.HttpClient();
+
+            var urlStr = "https://xamarinclassdemo.azurewebsites.net/api/login";
+
+            httpClient.DefaultRequestHeaders.Add("username", account);
+            httpClient.DefaultRequestHeaders.Add("password", password);
+
+            var authContent = new System.Net.Http.StringContent("");
+
+            var result = await httpClient.PostAsync(urlStr, authContent);
+
+            var resultStr = await result.Content.ReadAsStringAsync();
+
+            var returnValue = false;
+
+            try
+            {
+                returnValue = bool.Parse(resultStr);
+            }
+            catch (FormatException ftEx)
+            {
+                await DisplayAlert("錯誤", ftEx.Message, "OK");
+            }
+
+            return returnValue;
         }
     }
 }
