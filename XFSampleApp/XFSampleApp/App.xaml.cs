@@ -13,33 +13,13 @@ namespace XFSampleApp
         {
             InitializeComponent();
 
-            if(CheckIsAuth())
+            if(Services.AuthStatusFileService.CheckIsAuth())
             {
                 MainPage = new NavigationPage(new MainPage());
                 return;
             }
 
            MainPage = new NavigationPage(new AccountPage());
-        }
-
-        private bool CheckIsAuth()
-        {
-            var cacheDir = Xamarin.Essentials.FileSystem.CacheDirectory;
-            //var mainDir = Xamarin.Essentials.FileSystem.AppDirectory;
-
-            System.Diagnostics.Debug.WriteLine(cacheDir);
-            //System.Diagnostics.Debug.WriteLine(mainDir);
-
-            var fullPath = cacheDir + "auth.log";
-            //var fullPath = mainDir() + "auth.log";
-
-            if(File.Exists(fullPath))
-            {
-                var result = File.ReadAllText(fullPath);
-                result.StartsWith("Be Authorized,");
-                return true;
-            }
-            return false;
         }
 
         protected override void OnStart()

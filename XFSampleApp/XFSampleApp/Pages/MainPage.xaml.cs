@@ -33,22 +33,9 @@ namespace XFSampleApp.Pages
             };
         }
 
-        private async Task GetSchoolDataFromWebApi()
-        {
-            var httpClient = new System.Net.Http.HttpClient();
-
-            var urlStr = "https://xamarinclassdemo.azurewebsites.net/api/getschoolinfos";
-            var resultStr = await httpClient.GetStringAsync(urlStr);
-
-            System.Diagnostics.Debug.WriteLine(resultStr);
-
-            var schoolInfos = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<SchoolInfo>>(resultStr);
-            SchoolListView.ItemsSource = schoolData = schoolInfos;
-        }
-
         private async void ListView_Refreshing(object sender, EventArgs e)
         {
-            await GetSchoolDataFromWebApi();
+            SchoolListView.ItemsSource = schoolData = await Services.ApiAccessService.GetSchoolDataFromWebApi();
             //await Task.Delay(5000);
             SchoolListView.IsRefreshing = false; //SchoolListView.EndRefresh();
         }
@@ -95,27 +82,13 @@ namespace XFSampleApp.Pages
 
         private async void LogoutToolbarItem_Clicked(object sender, EventArgs e)
         {
-            DeleteAuthData();
+            Services.AuthStatusFileService.DeleteAuthData();
             if(Navigation.NavigationStack.Count > 1)
             {
                 await Navigation.PopAsync(true);
                 return;
             }
             App.Current.MainPage = new NavigationPage(new AccountPage());
-        }
-
-        private void DeleteAuthData()
-        {
-            var cacheDir = Xamarin.Essentials.FileSystem.CacheDirectory;
-            //var mainDir = Xamarin.Essentials.FileSystem.AppDirectory;
-
-            System.Diagnostics.Debug.WriteLine(cacheDir);
-            //System.Diagnostics.Debug.WriteLine(mainDir);
-
-            var fullPath = cacheDir + "auth.log";
-            //var fullPath = mainDir() + "auth.log";
-
-            System.IO.File.Delete(fullPath);
         }
     }
 }

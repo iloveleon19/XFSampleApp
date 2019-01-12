@@ -41,7 +41,7 @@ namespace XFSampleApp.Pages
             if (await LoginAuthAsync(accountStr, passwordStr))
             {
                 await DisplayAlert("通知", "登入成功", "Go");
-                SaveAuthData();
+                Services.AuthStatusFileService.SaveAuthData();
                 await Navigation.PushAsync(new MainPage());
             }
             else
@@ -52,25 +52,6 @@ namespace XFSampleApp.Pages
             }
         }
 
-        private void SaveAuthData()
-        {
-            var cacheDir = Xamarin.Essentials.FileSystem.CacheDirectory;
-            //var mainDir = Xamarin.Essentials.FileSystem.AppDirectory;
-
-            System.Diagnostics.Debug.WriteLine(cacheDir);
-            //System.Diagnostics.Debug.WriteLine(mainDir);
-
-            var fullPath = cacheDir + "auth.log";
-            //var fullPath = mainDir() + "auth.log";
-
-            File.WriteAllText(fullPath,$"Be Authorized,{DateTime.Now.Ticks}");
-
-            ////看看有沒有成功寫入資料
-            //var result = File.ReadAllText(fullPath);
-            //System.Diagnostics.Debug.WriteLine(result);
-
-        }
-
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
             AccountEntry.Text = "";
@@ -79,19 +60,7 @@ namespace XFSampleApp.Pages
 
         private async Task<bool> LoginAuthAsync(string account, string password)
         {
-            var httpClient = new System.Net.Http.HttpClient();
-
-            var urlStr = "https://xamarinclassdemo.azurewebsites.net/api/login";
-
-            httpClient.DefaultRequestHeaders.Add("username", account);
-            httpClient.DefaultRequestHeaders.Add("password", password);
-
-            var authContent = new System.Net.Http.StringContent("");
-
-            var result = await httpClient.PostAsync(urlStr, authContent);
-
-            var resultStr = await result.Content.ReadAsStringAsync();
-
+            var resultStr = await Services.ApiAccessService.PostToAuthWebApi(account, password);
             var returnValue = false;
 
             try
